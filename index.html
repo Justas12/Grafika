@@ -41,7 +41,7 @@
        		draw(iterations);
        		}
        	}
-        function draw(steps) {
+        const draw = (steps) => {
 
             var canvas = document.getElementById('window');
             if (canvas.getContext) {
@@ -50,7 +50,7 @@
             	start = iterations - 1;
                 fractal(iterations);
 
-                function fractal(steps) {
+                const fractal = (steps) => {
                     if (steps > 0) {
                         steps = steps - 1;
 
@@ -84,7 +84,7 @@
                     }
                 }
 
-                function base(){
+                const base = () => {
 	                ctx.beginPath();
 	                ctx.moveTo(0, 500);
 	                ctx.lineTo(500, 500);
