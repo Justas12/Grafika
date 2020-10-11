@@ -27,21 +27,21 @@
        <script type="text/javascript">
        	var iterations = 0;
        	var start = 0;
-       	const up = () => {
+       	function up() {
        		if (iterations != 10) {
        			iterations++;
        		document.getElementById("steps").innerHTML = `Steps: ${iterations}`;
        		draw(iterations);
        		}
        	}
-       	const down = () => {
+       	function down() {
        		if (iterations != 0) {
        			iterations--;
        		document.getElementById("steps").innerHTML = `Steps: ${iterations}`;
        		draw(iterations);
        		}
        	}
-        const draw = (steps) => {
+        function draw() {
 
             var canvas = document.getElementById('window');
             if (canvas.getContext) {
@@ -50,7 +50,7 @@
             	start = iterations - 1;
                 fractal(iterations);
 
-                const fractal = (steps) => {
+                function fractal(steps) {
                     if (steps > 0) {
                         steps = steps - 1;
 
@@ -84,7 +84,7 @@
                     }
                 }
 
-                const base = () => {
+                function base(){
 	                ctx.beginPath();
 	                ctx.moveTo(0, 500);
 	                ctx.lineTo(500, 500);
@@ -100,7 +100,7 @@
 
             }
         }
-        draw(0);
+        draw();
     </script>
     </body>
 </html>
