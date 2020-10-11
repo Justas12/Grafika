@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Untitled</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="author" href="humans.txt">
+        <style type="text/css">
+        	body {
+        		margin: 0;
+        		padding: 0;
+        	}
+        	#wrapper {
+        		display: flex;
+        	}
+        </style>
+    </head>
+    <body>
+       <canvas style="border: 1px solid black;" id="window" width="500" height="500"></canvas>
+       <div id="wrapper">
+       		<button id="up" onclick="up()">+</button>
+       		<p id="steps">Steps: 0</p>
+       		<button id="down" onclick="down()">-</button>
+       </div>
+       <script type="text/javascript">
+       	var iterations = 0;
+       	var start = 0;
+       	const up = () => {
+       		if (iterations != 10) {
+       			iterations++;
+       		document.getElementById("steps").innerHTML = `Steps: ${iterations}`;
+       		draw(iterations);
+       		}
+       	}
+       	const down = () => {
+       		if (iterations != 0) {
+       			iterations--;
+       		document.getElementById("steps").innerHTML = `Steps: ${iterations}`;
+       		draw(iterations);
+       		}
+       	}
+        function draw(steps) {
+
+            var canvas = document.getElementById('window');
+            if (canvas.getContext) {
+                var ctx = canvas.getContext("2d");
+            	ctx.clearRect(0, 0, canvas.width, canvas.height);
+            	start = iterations - 1;
+                fractal(iterations);
+
+                function fractal(steps) {
+                    if (steps > 0) {
+                        steps = steps - 1;
+
+                        ctx.save();
+                        ctx.save();
+                        ctx.save();
+                        ctx.save();	
+
+                        ctx.fillStyle = steps == start ? "red" : ctx.fillStyle;
+                        ctx.transform(0.5, 0, 0, 0.5, 0, 250);
+                        fractal(steps);
+                        ctx.restore();
+
+                        ctx.fillStyle = steps == start ? "blue" : ctx.fillStyle;
+                        ctx.transform(0, 0.5, 0.5, 0, 250, 250);
+                        fractal(steps);
+                        ctx.restore();
+
+                        ctx.fillStyle = steps == start ? "green" : ctx.fillStyle;
+                        ctx.transform(0.5, 0, 0, -0.5, 250, 250);
+                        fractal(steps);
+                        ctx.restore();
+
+                        ctx.fillStyle = steps == start ? "grey" : ctx.fillStyle;
+                        ctx.transform(-0.25, 0, 0, -0.25, 250, 125);
+                        fractal(steps);
+                        ctx.restore();
+                    }
+                    else {
+                        base();
+                    }
+                }
+
+                function base(){
+	                ctx.beginPath();
+	                ctx.moveTo(0, 500);
+	                ctx.lineTo(500, 500);
+	                ctx.lineTo(500, 0);
+	                ctx.lineTo(125, 0);
+	                ctx.lineTo(125, 125);
+	                ctx.lineTo(250, 125);
+	                ctx.lineTo(250, 250);
+	                ctx.lineTo(62, 250);
+	                ctx.closePath();
+	                ctx.fill();
+                }
+
+            }
+        }
+        draw(0);
+    </script>
+    </body>
+</html>
